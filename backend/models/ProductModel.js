@@ -104,7 +104,13 @@ const productSchema = new mongoose.Schema({
   createAt:{
       type:Date,
       default: Date.now()
-  }
+  },
+  productId: {
+    type: String,
+    required: [true, "Please enter product ID"],
+    unique: true,
+    trim: true,
+  },
 })
 
 module.exports = mongoose.model("Product",productSchema);

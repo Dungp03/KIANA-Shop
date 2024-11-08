@@ -126,8 +126,11 @@ const CreateProduct = ({ history }) => {
   };
 
   const generateProductId = () => {
-    const randomId = Math.floor(100000 + Math.random() * 900000); // Tạo số ngẫu nhiên từ 100000 đến 999999
-    return `SP-${randomId}`;
+    // Tạo số ngẫu nhiên 6 chữ số từ 100000 đến 999999
+    const randomNumber = Math.floor(100000 + Math.random() * 900000);
+    // Đảm bảo luôn có 6 chữ số bằng cách sử dụng padStart
+    const sixDigits = randomNumber.toString().padStart(6, '0');
+    return `SP-${sixDigits}`;
   };
 
   useEffect(() => {

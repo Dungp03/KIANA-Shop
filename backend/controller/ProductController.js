@@ -15,7 +15,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     Stock,
     sizes,
     color,
-   
+    productId,
   } = req.body;
   let images = [];
 
@@ -50,7 +50,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     description,
     category,
     Stock,
-   
+    productId,
     sizes: JSON.parse(sizes),
     color: JSON.parse(color),
     images: imagesLinks,
@@ -115,7 +115,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     Stock,
     sizes,
     color,
-  
+    productId,
   } = req.body;
   let product = await Product.findById(req.params.id);
   if (!product) {
@@ -158,9 +158,9 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       description,
       category,
       Stock,
-     
-      sizes:JSON.parse(sizes),
-      color:JSON.parse(color),
+      productId,
+      sizes: JSON.parse(sizes),
+      color: JSON.parse(color),
       images,
     },
     { new: true, runValidators: true, useUnified: false }
