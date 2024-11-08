@@ -146,28 +146,42 @@ const CreateProduct = ({ history }) => {
     }
   }, [dispatch, alert, error, history, success]);
 
-  const createProductSubmitHandler = (e) => {
+  const createProductSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const id = generateProductId();
-    setProductId(id); // Đặt ID cho sản phẩm
+    try {
+      const id = generateProductId();
+      
+      // Kiểm tra xem ID đã tồn tại chưa
+      const response = await fetch(`/api/v1/product/check/${id}`);
+      const data = await response.json();
+      
+      if (data.exists) {
+        // Nếu ID đã tồn tại, tạo ID mới
+        return createProductSubmitHandler(e);
+      }
 
-    const myForm = new FormData();
-    myForm.set("productId", id);
-    myForm.set("name", name);
-    myForm.set("price", price);
-    myForm.set("offerPrice", offerPrice);
-    myForm.append("description", description);
-    myForm.set("category", category);
-    myForm.set("Stock", Stock);
-    myForm.append("sizes", JSON.stringify(sizeList));
-    myForm.append("color", JSON.stringify(colorList));
-    // myForm.set("supplier", supplier);
+      setProductId(id);
 
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
-    dispatch(createProduct(myForm));
+      const myForm = new FormData();
+      myForm.set("productId", id);
+      myForm.set("name", name);
+      myForm.set("price", price);
+      myForm.set("offerPrice", offerPrice);
+      myForm.append("description", description);
+      myForm.set("category", category);
+      myForm.set("Stock", Stock);
+      myForm.append("sizes", JSON.stringify(sizeList));
+      myForm.append("color", JSON.stringify(colorList));
+      // myForm.set("supplier", supplier);
+
+      images.forEach((image) => {
+        myForm.append("images", image);
+      });
+      dispatch(createProduct(myForm));
+    } catch (error) {
+      toast.error("Có lỗi xảy ra khi tạo sản phẩm");
+    }
   };
 
   const createProductImagesChange = (e) => {

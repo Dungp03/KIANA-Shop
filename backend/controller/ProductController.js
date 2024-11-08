@@ -6,7 +6,7 @@ const cloudinary = require("cloudinary");
 
 // create Product --Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-  const {
+  let {
     name,
     price,
     description,
@@ -17,60 +17,41 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
     color,
     productId,
   } = req.body;
-  let images = [];
 
-
-  if (typeof req.body.images === "string") {
-    images.push(req.body.images);
-  } else {
-    images = req.body.images;
+  // Kiểm tra và format productId nếu cần
+  if (!productId || !productId.match(/^SP-\d{6}$/)) {
+    const randomNumber = Math.floor(100000 + Math.random() * 900000);
+    productId = `SP-${randomNumber.toString().padStart(6, '0')}`;
   }
 
-  const imagesLinks = [];
-
-  for (let i = 0; i < images.length; i++) {
-    const result = await cloudinary.v2.uploader.upload(images[i], {
-      folder: "products",
-    });
-
-    imagesLinks.push({
-      public_id: result.public_id,
-      url: result.secure_url,
-    });
-  }
-
-  req.body.images = imagesLinks;
-  req.body.user = req.user.id;
-
-  // const product = await Product.create(req.body);
   const product = await Product.create({
-    name: name,
+    name,
     price,
-    offerPrice,
     description,
     category,
+    offerPrice,
     Stock,
-    productId,
+    productId, // Đảm bảo sử dụng productId đã được format
     sizes: JSON.parse(sizes),
     color: JSON.parse(color),
     images: imagesLinks,
-    createdBy: req.user._id,
+    user: req.user._id,
   });
-  // const product = new Product({
-  //   name: name,
-  //   price,
-  //   offerPrice,
-  //   description,
-  //   category,
-  //   Stock,
-  //   sizes,
-  //   imagesLinks,
-
-  // });
 
   res.status(201).json({
     success: true,
     product,
+  });
+});
+
+// Thêm API để kiểm tra xem productId đã tồn tại chưa
+exports.checkProductId = catchAsyncErrors(async (req, res, next) => {
+  const { productId } = req.params;
+  const exists = await Product.findOne({ productId });
+  
+  res.status(200).json({
+    success: true,
+    exists: !!exists
   });
 });
 

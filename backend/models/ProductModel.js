@@ -107,10 +107,22 @@ const productSchema = new mongoose.Schema({
   },
   productId: {
     type: String,
-    required: [true, "Please enter product ID"],
+    required: [true, "Vui lòng nhập ID sản phẩm"],
     unique: true,
     trim: true,
+    index: true,
   },
-})
+}, {
+  timestamps: true,
+});
+
+productSchema.index({ productId: 1 }, { unique: true });
+
+productSchema.pre('save', function(next) {
+  if (!this.productId.match(/^SP-\d{6}$/)) {
+    next(new Error('Product ID phải có định dạng SP-XXXXXX'));
+  }
+  next();
+});
 
 module.exports = mongoose.model("Product",productSchema);
