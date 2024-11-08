@@ -3,7 +3,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../../more/Metadata";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -16,7 +16,7 @@ const AllUsers = ({ history }) => {
 
   const dispatch = useDispatch();
 
-  const { error, users } = useSelector((state) => state.allUsers); 
+  const { error, users } = useSelector((state) => state.allUsers);
 
   const {
     error: deleteError,
@@ -135,7 +135,7 @@ const AllUsers = ({ history }) => {
           />
         </div>
       </div>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -145,7 +145,7 @@ const AllUsers = ({ history }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </Fragment>
   );
 };

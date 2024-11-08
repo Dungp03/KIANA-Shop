@@ -8,7 +8,7 @@ import ProductCard from "./ProductCard";
 import "./Search.css";
 import Pagination from "react-js-pagination";
 
-const Search = ({ history,match }) => {
+const Search = ({ history, match }) => {
   const [keyword, setKeyword] = useState("");
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,8 +25,8 @@ const Search = ({ history,match }) => {
       toast.error(error);
       dispatch(clearErrors());
     }
-    dispatch(getProduct(keywords,currentPage));
-  }, [dispatch, error, currentPage,keywords]);
+    dispatch(getProduct(keywords, currentPage));
+  }, [dispatch, error, currentPage, keywords]);
 
   const searchSubmitHandler = (e) => {
     e.preventDefault();
@@ -36,11 +36,11 @@ const Search = ({ history,match }) => {
       history.push("/products");
     }
   };
-  const switcherTab = useRef(null);
+  const RouteserTab = useRef(null);
 
   return (
     <div className="ContainerSearch">
-      <div className="navbar flex pz__10 space__beetween" ref={switcherTab}>
+      <div className="navbar flex pz__10 space__beetween" ref={RouteserTab}>
         <Fragment>
           <MetaData title="Tìm kiếm" />
           <form className="searchBox" onSubmit={searchSubmitHandler}>

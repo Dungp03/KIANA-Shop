@@ -3,7 +3,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../../more/Metadata";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -55,7 +55,7 @@ const AllOrder = ({ history }) => {
     {
       field: "status",
       headerName: "Trạng thái",
-      minWidth: 150, 
+      minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
         return params.getValue(params.id, "status") === "Delivered"
@@ -63,7 +63,7 @@ const AllOrder = ({ history }) => {
           : "redColor";
       },
     },
-    { field: "createAt", headerName: "Ngày tạo", minWidth: 100, flex:0.3 },
+    { field: "createAt", headerName: "Ngày tạo", minWidth: 100, flex: 0.3 },
     {
       field: "itemsQty",
       headerName: "Số lượng",
@@ -141,7 +141,7 @@ const AllOrder = ({ history }) => {
           />
         </div>
       </div>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -151,7 +151,7 @@ const AllOrder = ({ history }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </Fragment>
   );
 };

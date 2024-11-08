@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./UserOption.css";
 import { SpeedDial, SpeedDialAction, SpeedDialIcon } from "@material-ui/lab";
-import Backdrop from "@material-ui/core/Backdrop";
+import Backdrop from "@mui/material/Backdrop";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -11,7 +11,7 @@ import Support from "@material-ui/icons/ReportProblem"
 import HeartIcon from "@material-ui/icons/FavoriteBorder";
 import HeartActiveIcon from "@material-ui/icons/Favorite";
 import HomeIcon from "@material-ui/icons/Home";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userAction";
 import { useRef } from "react";
@@ -24,7 +24,7 @@ const UserData = () => {
 
 
   const [open, setOpen] = useState(false);
-  const history = useHistory();
+  const history = useNavigate();
 
   const scroolEffect = useRef(null);
 
@@ -74,24 +74,24 @@ const UserData = () => {
           />
          
         ))} */}
-      
-          <SpeedDialAction 
+
+        <SpeedDialAction
           key={"WhatsApp"}
           icon={<WhatsAppIcon />}
-            tooltipTitle={"WhatsApp"}
-            tooltipOpen={false}
-            href="https://call.whatsapp.com/voice/TVh9QBu0E8WfGXgHsG8X3S"
-          />
-       
-      
-          <SpeedDialAction 
+          tooltipTitle={"WhatsApp"}
+          tooltipOpen={false}
+          href="https://call.whatsapp.com/voice/TVh9QBu0E8WfGXgHsG8X3S"
+        />
+
+
+        <SpeedDialAction
           key={"Messager"}
           icon={<FacebookIcon />}
-            tooltipTitle={"Message"}
-            tooltipOpen={false}
-            href="https://m.me/212296270204994"
-          />
-       
+          tooltipTitle={"Message"}
+          tooltipOpen={false}
+          href="https://m.me/212296270204994"
+        />
+
       </SpeedDial>
       <ToastContainer
         position="bottom-center"

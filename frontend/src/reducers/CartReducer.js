@@ -3,20 +3,17 @@ import {
   REMOVE_CART_ITEM,
   SAVE_SHIPPING_INFO,
   SAVE_NOTE_BUY,
-
 } from "../constans/CartConstans";
 
 export const cartReducer = (
-  state = { cartItems: [], shippingInfo: {} },
+  state = { cartItems: [], shippingInfo: {}, noteBuy: "" },
   action
 ) => {
-  switch (action.type) {
+  switch (action.type) {  // Thay Routes thành switch
     case ADD_TO_CART:
       const item = action.payload;
 
-      const isItemExist = state.cartItems.find(
-        (i) => i.product === item.product
-      );
+      const isItemExist = state.cartItems.find((i) => i.product === item.product);
 
       if (isItemExist) {
         return {
@@ -43,11 +40,13 @@ export const cartReducer = (
         ...state,
         shippingInfo: action.payload,
       };
-      case SAVE_NOTE_BUY:
-        return {
-          ...state,
-          noteBuy: action.payload,
-        };
+
+    case SAVE_NOTE_BUY:
+      return {
+        ...state,
+        noteBuy: action.payload,
+      };
+
     default:
       return state;
   }

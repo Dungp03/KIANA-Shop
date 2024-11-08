@@ -27,8 +27,8 @@ import DOMPurify from "isomorphic-dompurify";
 const ProductDetails = ({ match, history }) => {
   const dispatch = useDispatch();
 
-  const { product,loading, error } = useSelector(
-    (state) => state.productDetails  
+  const { product, loading, error } = useSelector(
+    (state) => state.productDetails
   );
 
 
@@ -44,7 +44,7 @@ const ProductDetails = ({ match, history }) => {
     myForm.set("productId", match.params.id);
 
     {
-      isAuthenticated !== true ? history.push(`/login?redirect=/`) : <></>;
+      isAuthenticated !== true ? history.push(`/login?Navigate=/`) : <></>;
     }
 
     dispatch(newReview(myForm));
@@ -59,12 +59,12 @@ const ProductDetails = ({ match, history }) => {
   // Increase quantity
   const [quantity, setQuantity] = useState(1);
   let [size, setSize] = useState(product.sizes && product.sizes[0].name);
-  
-  let [color, setColor] = useState( product.color && product.color[0].name);
+
+  let [color, setColor] = useState(product.color && product.color[0].name);
   // let [color, setColor] = useState(product.color[0].name
   // );
-//  console.log(product.sizes[0].name)
-//  console.log(product.color[0].name)
+  //  console.log(product.sizes[0].name)
+  //  console.log(product.color[0].name)
 
   useEffect(() => {
     if (error) {
@@ -96,7 +96,7 @@ const ProductDetails = ({ match, history }) => {
   };
 
   const addToCartHandler = () => {
-    
+
     if (product.Stock > 0) {
       dispatch(addItemsToCart(match.params.id, quantity, color, size));
       toast.success("Đã thêm sản phẩm vào giỏ hàng!");
@@ -142,8 +142,8 @@ const ProductDetails = ({ match, history }) => {
                 <span style={{ marginLeft: "16px" }}>
                   ({product.numOfReviews} Reviews)
                 </span>
-                <span style={{ marginLeft: "16px"}}>|</span>
-                <span style={{ marginLeft: "16px", width:"5px"}}>
+                <span style={{ marginLeft: "16px" }}>|</span>
+                <span style={{ marginLeft: "16px", width: "5px" }}>
                   Mã số:{product._id}
                 </span>
               </div>
@@ -170,7 +170,7 @@ const ProductDetails = ({ match, history }) => {
                   <span className="quantity">Số lượng:</span>
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
-                    <input type="number" style={{textAlign:"center", fontWeight:"550"}} readOnly value={quantity} />
+                    <input type="number" style={{ textAlign: "center", fontWeight: "550" }} readOnly value={quantity} />
                     <button onClick={increaseQuantity}>+</button>
                   </div>{" "}
                 </div>
@@ -207,13 +207,13 @@ const ProductDetails = ({ match, history }) => {
                     >
                       Chọn size:
                     </h1>
-                  
+
                     <select
                       style={{
                         padding: "6px",
                         width: "8vmax",
                         fontSize: "1.1vmax",
-                        cursor:"pointer"
+                        cursor: "pointer"
                       }}
                       onChange={(e) => setSize(e.target.value)}
                     >
@@ -247,13 +247,13 @@ const ProductDetails = ({ match, history }) => {
                     >
                       Chọn màu:
                     </h1>
-                   
+
                     <select
                       style={{
                         padding: "6px",
                         width: "8vmax",
                         fontSize: "1.1vmax",
-                        cursor:"pointer"
+                        cursor: "pointer"
                       }}
                       onChange={(e) => setColor(e.target.value)}
                     >
@@ -511,7 +511,7 @@ const ProductDetails = ({ match, history }) => {
                     cursor: "pointer",
                     color: "#fff",
                     borderRadius: "14px",
-                    marginLeft:"4vmax"
+                    marginLeft: "4vmax"
                   }}
                   onClick={reviewSubmitHandler}
                 >

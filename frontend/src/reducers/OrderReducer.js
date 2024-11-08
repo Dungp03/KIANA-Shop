@@ -22,8 +22,9 @@ import {
   UPDATE_ORDER_SUCCESS,
 } from "../constans/OrderConstans";
 
+// New Order
 export const newOrderReducer = (state = {}, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case CREATE_ORDER_REQUEST:
       return {
         ...state,
@@ -41,6 +42,7 @@ export const newOrderReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
@@ -52,142 +54,150 @@ export const newOrderReducer = (state = {}, action) => {
   }
 };
 
+// My Orders
 export const myOrdersReducer = (state = { orders: [] }, action) => {
-    switch (action.type) {
-      case MY_ORDERS_REQUEST:
-        return {
-          loading: true,
-        };
-  
-      case MY_ORDERS_SUCCESS:
-        return {
-          loading: false,
-          orders: action.payload,
-        };
-  
-      case MY_ORDERS_FAIL:
-        return {
-          loading: false,
-          error: action.payload,
-        };
-      case CLEAR_ERRORS:
-        return {
-          ...state,
-          error: null,
-        };
-  
-      default:
-        return state;
-    }
-  };
+  switch (action.type) {  // Sử dụng switch thay vì Routes
+    case MY_ORDERS_REQUEST:
+      return {
+        loading: true,
+      };
 
-  export const orderDetailsReducer = (state = { order: {} }, action) => {
-    switch (action.type) {
-      case ORDER_DETAILS_REQUEST:
-        return {
-          loading: true,
-        };
-  
-      case ORDER_DETAILS_SUCCESS:
-        return {
-          loading: false,
-          order: action.payload,
-        };
-  
-      case ORDER_DETAILS_FAIL:
-        return {
-          loading: false,
-          error: action.payload,
-        };
-      case CLEAR_ERRORS:
-        return {
-          ...state,
-          error: null,
-        };
-  
-      default:
-        return state;
-    }
-  };
+    case MY_ORDERS_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
 
-  // All Orders ------ Admin
-  export const allOrdersReducer = (state = { orders: [] }, action) => {
-    switch (action.type) {
-      case ALL_ORDERS_REQUEST:
-        return {
-          loading: true,
-        };
-  
-      case ALL_ORDERS_SUCCESS:
-        return {
-          loading: false,
-          orders: action.payload,
-        };
-  
-      case ALL_ORDERS_FAIL:
-        return {
-          loading: false,
-          error: action.payload,
-        };
-      case CLEAR_ERRORS:
-        return {
-          ...state,
-          error: null,
-        };
-  
-      default:
-        return state;
-    }
-  };
-  
-  export const orderReducer = (state = {}, action) => {
-    switch (action.type) {
-      case UPDATE_ORDER_REQUEST:
-      case DELETE_ORDER_REQUEST:
-        return {
-          ...state,
-          loading: true,
-        };
-  
-      case UPDATE_ORDER_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          isUpdated: action.payload,
-        };
-  
-      case DELETE_ORDER_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          isDeleted: action.payload,
-        };
-  
-      case UPDATE_ORDER_FAIL:
-      case DELETE_ORDER_FAIL:
-        return {
-          ...state,
-          loading: false,
-          error: action.payload,
-        };
-      case UPDATE_ORDER_RESET:
-        return {
-          ...state,
-          isUpdated: false,
-        };
-  
-      case DELETE_ORDER_RESET:
-        return {
-          ...state,
-          isDeleted: false,
-        };
-      case CLEAR_ERRORS:
-        return {
-          ...state,
-          error: null,
-        };
-  
-      default:
-        return state;
-    }
-  };
+    case MY_ORDERS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// Order Details
+export const orderDetailsReducer = (state = { order: {} }, action) => {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
+    case ORDER_DETAILS_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case ORDER_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        order: action.payload,
+      };
+
+    case ORDER_DETAILS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// All Orders (Admin)
+export const allOrdersReducer = (state = { orders: [] }, action) => {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
+    case ALL_ORDERS_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case ALL_ORDERS_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
+
+    case ALL_ORDERS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// Order (Update/Delete)
+export const orderReducer = (state = {}, action) => {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
+    case UPDATE_ORDER_REQUEST:
+    case DELETE_ORDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case UPDATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+
+    case DELETE_ORDER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      };
+
+    case UPDATE_ORDER_FAIL:
+    case DELETE_ORDER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case UPDATE_ORDER_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+
+    case DELETE_ORDER_RESET:
+      return {
+        ...state,
+        isDeleted: false,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};

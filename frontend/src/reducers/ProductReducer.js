@@ -34,8 +34,9 @@ import {
   ALL_REVIEW_FAIL,
 } from "../constans/ProductConstans";
 
+// Products Reducer
 export const productsReducer = (state = { products: [] }, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case ALL_PRODUCT_REQUEST:
     case ADMIN_PRODUCT_REQUEST:
       return {
@@ -63,18 +64,21 @@ export const productsReducer = (state = { products: [] }, action) => {
         loading: false,
         error: action.payload,
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
 };
 
+// Product Details Reducer
 export const productDetailsReducer = (state = { product: {} }, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case PRODUCT_DETAILS_REQUEST:
       return {
         loading: true,
@@ -95,14 +99,15 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
 };
 
-// Product review
+// New Review Reducer
 export const newReviewReducer = (state = {}, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case NEW_REVIEW_REQUEST:
       return {
         ...state,
@@ -121,7 +126,7 @@ export const newReviewReducer = (state = {}, action) => {
       };
     case NEW_REVIEW_RESET:
       return {
-        ...state, 
+        ...state,
         success: false,
       };
     case CLEAR_ERRORS:
@@ -129,14 +134,15 @@ export const newReviewReducer = (state = {}, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
 };
 
-// New Product ----Admin
+// New Product Reducer (Admin)
 export const newProductReducer = (state = { product: {} }, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case NEW_PRODUCT_REQUEST:
       return {
         ...state,
@@ -164,14 +170,15 @@ export const newProductReducer = (state = { product: {} }, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
 };
 
-// Delete Product
+// Delete Product Reducer
 export const deleteProductReducer = (state = {}, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case DELETE_PRODUCT_REQUEST:
       return {
         ...state,
@@ -218,14 +225,15 @@ export const deleteProductReducer = (state = {}, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
 };
 
-// All reviews --- Admin
+// All Reviews Reducer (Admin)
 export const productReviewsReducer = (state = { reviews: [] }, action) => {
-  switch (action.type) {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case ALL_REVIEW_REQUEST:
       return {
         ...state,
@@ -248,14 +256,15 @@ export const productReviewsReducer = (state = { reviews: [] }, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }
 };
 
-// Delete Review ----- Admin
-export const deleteReviewReducer = (state = {}, action) => { 
-  switch (action.type) {
+// Delete Review Reducer (Admin)
+export const deleteReviewReducer = (state = {}, action) => {
+  switch (action.type) {  // Sử dụng switch thay vì Routes
     case DELETE_REVIEW_REQUEST:
       return {
         ...state,
@@ -283,6 +292,7 @@ export const deleteReviewReducer = (state = {}, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }

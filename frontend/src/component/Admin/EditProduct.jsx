@@ -2,14 +2,14 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, updateProduct, getProductDetails } from "../../actions/ProductActions";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../../more/Metadata";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 import DescriptionIcon from "@material-ui/icons/Description";
 import StorageIcon from "@material-ui/icons/Storage";
 import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-    // eslint-disable-next-line
+// eslint-disable-next-line
 import DiscountIcon from "@material-ui/icons/LocalOffer";
 import SideBar from "./Sidebar";
 import { UPDATE_PRODUCT_RESET } from "../../constans/ProductConstans";
@@ -33,8 +33,8 @@ const UpdateProduct = ({ history, match }) => {
   } = useSelector((state) => state.deleteProduct);
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0); 
-      // eslint-disable-next-line
+  const [price, setPrice] = useState(0);
+  // eslint-disable-next-line
   const [offerPrice, setOfferPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -96,30 +96,30 @@ const UpdateProduct = ({ history, match }) => {
     { name: "Vàng" },
     { name: "ONE COLOR" },
   ]);
- 
 
-   // chọn size
-   const [sizeList, setSizeList] = useState([]);
-   const chooseSize = (sizeObject) => {
-     const filtered = sizeList.filter((size) => size.name !== sizeObject.name);
-     setSizeList([...filtered, sizeObject]);
-   };
-   const deleteSize = (name) => {
-     const filtered = sizeList.filter((size) => size.name !== name);
-     setSizeList(filtered);
-   };
-   //chọn màu
-   const [colorList, setColorList] = useState([]);
-   const chooseColor = (sizeObject) => {
-     const filtered = colorList.filter(
-       (color) => color.name !== sizeObject.name
-     );
-     setColorList([...filtered, sizeObject]);
-   };
-   const deleteColor = (name) => {
-     const filtered = colorList.filter((color) => color.name !== name);
-     setColorList(filtered);
-   };
+
+  // chọn size
+  const [sizeList, setSizeList] = useState([]);
+  const chooseSize = (sizeObject) => {
+    const filtered = sizeList.filter((size) => size.name !== sizeObject.name);
+    setSizeList([...filtered, sizeObject]);
+  };
+  const deleteSize = (name) => {
+    const filtered = sizeList.filter((size) => size.name !== name);
+    setSizeList(filtered);
+  };
+  //chọn màu
+  const [colorList, setColorList] = useState([]);
+  const chooseColor = (sizeObject) => {
+    const filtered = colorList.filter(
+      (color) => color.name !== sizeObject.name
+    );
+    setColorList([...filtered, sizeObject]);
+  };
+  const deleteColor = (name) => {
+    const filtered = colorList.filter((color) => color.name !== name);
+    setColorList(filtered);
+  };
 
   const productId = match.params.id;
   useEffect(() => {
@@ -163,7 +163,7 @@ const UpdateProduct = ({ history, match }) => {
     updateError,
   ]);
 
-  const updateProductSubmitHandler  = (e) => {
+  const updateProductSubmitHandler = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
@@ -188,7 +188,7 @@ const UpdateProduct = ({ history, match }) => {
   };
 
   const updateProductImagesChange = (e) => {
-    const files = Array.from(e.target.files); 
+    const files = Array.from(e.target.files);
 
     setImages([]);
     setImagesPreview([]);
@@ -360,7 +360,7 @@ const UpdateProduct = ({ history, match }) => {
                 </div>
               )}
             </div>
-           
+
             <div className="description">
               {/* <DescriptionIcon />
               <textarea
@@ -370,7 +370,7 @@ const UpdateProduct = ({ history, match }) => {
                 cols="30"
                 rows="1"
               ></textarea> */}
-              <ReactQuill theme="snow" id="description" value={description} onChange={setDescription}  placeholder="Description..." />
+              <ReactQuill theme="snow" id="description" value={description} onChange={setDescription} placeholder="Description..." />
             </div>
 
             <Button
@@ -383,7 +383,7 @@ const UpdateProduct = ({ history, match }) => {
           </form>
         </div>
       </div>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -393,7 +393,7 @@ const UpdateProduct = ({ history, match }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </Fragment>
   );
 };

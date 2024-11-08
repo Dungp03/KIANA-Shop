@@ -1,9 +1,9 @@
-import React, {useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../more/Metadata";
-import { Typography } from "@material-ui/core";
-import { 
+import { Typography } from "@mui/material";
+import {
   CardNumberElement,
   CardCvcElement,
   CardExpiryElement,
@@ -30,12 +30,12 @@ const Payment = ({ history }) => {
   const payBtn = useRef(null);
 
   const { shippingInfo, cartItems, noteBuy } = useSelector((state) => state.cart);
-  
+
   const { user } = useSelector((state) => state.user);
-  const { error,loading } = useSelector((state) => state.order);
+  const { error, loading } = useSelector((state) => state.order);
 
   const paymentData = {
-    amount: Math.round(orderInfo.totalPrice ),
+    amount: Math.round(orderInfo.totalPrice),
   };
   //  amount: Math.round(orderInfo.totalPrice * 100),
   const order = {
@@ -51,7 +51,7 @@ const Payment = ({ history }) => {
 
 
 
-  const submitHandler = async (e) => { 
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     payBtn.current.disabled = true;
@@ -120,52 +120,52 @@ const Payment = ({ history }) => {
   }, [dispatch, error, toast]);
 
   return (
-   <>
-   {loading ? (
-     <Loading />
-   ) : (
     <>
-    <MetaData title="Thanh toán" />
-    <Header />
-    <CheckoutSteps activeStep={2} />
-    <div className="paymentContainer">
-      <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-        <Typography>Thông tin thẻ</Typography>
-        <div>
-          <CreditCardIcon />
-          <CardNumberElement className="paymentInput" />
-        </div>
-        <div>
-          <EventIcon />
-          <CardExpiryElement className="paymentInput" />
-        </div>
-        <div>
-          <VpnKeyIcon />
-          <CardCvcElement className="paymentInput" />
-        </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <MetaData title="Thanh toán" />
+          <Header />
+          <CheckoutSteps activeStep={2} />
+          <div className="paymentContainer">
+            <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+              <Typography>Thông tin thẻ</Typography>
+              <div>
+                <CreditCardIcon />
+                <CardNumberElement className="paymentInput" />
+              </div>
+              <div>
+                <EventIcon />
+                <CardExpiryElement className="paymentInput" />
+              </div>
+              <div>
+                <VpnKeyIcon />
+                <CardCvcElement className="paymentInput" />
+              </div>
 
-        <input
-          type="submit"
-          value={`Thanh toán - đ.${orderInfo && orderInfo.totalPrice}`}
-          ref={payBtn}
-          className="paymentFormBtn"
-        />
-      </form>
-    </div>
-    <ToastContainer 
-     position="bottom-center"
-     autoClose={5000}
-     hideProgressBar={false}
-     newestOnTop={false}
-     closeOnClick
-     rtl={false}
-     pauseOnFocusLoss
-     draggable
-     pauseOnHover
-     />
-  </>
-   )}
-   </>
+              <input
+                type="submit"
+                value={`Thanh toán - đ.${orderInfo && orderInfo.totalPrice}`}
+                ref={payBtn}
+                className="paymentFormBtn"
+              />
+            </form>
+          </div>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </>
+      )}
+    </>
   );
 };
 

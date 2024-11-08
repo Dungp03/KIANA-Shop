@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from "./CheckoutSteps";
 import MetaData from "../../more/Metadata";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import BottomTab from "../../more/BottomTab";
 import currency from "currency-formatter";
 import Header from "../Home/Header";
@@ -165,11 +165,11 @@ const ConfirmOrder = ({ history }) => {
 
             <button onClick={proceedToPayment}>Tiến hành thanh toán</button>
             <div className="orderSummaryTotal"></div>
-            {totalPrice && totalPrice > 500000 ? ( <p style={{fontSize:"1.2vmax"}}>Không áp dụng <b>thanh toán khi nhận hàng</b> đối với đơn hàng có tổng giá trị lớn hơn <b>500.000VND</b> </p>) : (<>
+            {totalPrice && totalPrice > 500000 ? (<p style={{ fontSize: "1.2vmax" }}>Không áp dụng <b>thanh toán khi nhận hàng</b> đối với đơn hàng có tổng giá trị lớn hơn <b>500.000VND</b> </p>) : (<>
               <button onClick={paymentAtHome}>Thanh toán khi nhận hàng</button>
-             
-              </>
-             
+
+            </>
+
             )}
             {/* <button onClick={paymentAtHome}>Thanh toán khi nhận hàng</button> */}
           </div>

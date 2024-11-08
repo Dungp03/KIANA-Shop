@@ -7,8 +7,8 @@ import {
   deleteProduct,
   getAdminProduct,
 } from "../../actions/ProductActions";
-import { Link } from "react-router-dom"; 
-import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 import MetaData from "../../more/Metadata";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -18,39 +18,39 @@ import { ToastContainer, toast } from 'react-toastify';
 import { DELETE_PRODUCT_RESET } from "../../constans/ProductConstans";
 
 
-const AllProducts = ({history}) => {
+const AllProducts = ({ history }) => {
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-const { error, products } = useSelector((state) => state.products);
+  const { error, products } = useSelector((state) => state.products);
 
-const { error: deleteError, isDeleted } = useSelector(
+  const { error: deleteError, isDeleted } = useSelector(
     (state) => state.deleteProduct
   );
   const deleteProductHandler = (id) => {
     dispatch(deleteProduct(id));
   };
 
-useEffect(() => {
+  useEffect(() => {
     if (error) {
       alert(error);
       dispatch(clearErrors());
     }
     if (deleteError) {
-        toast.error(deleteError);
-        dispatch(clearErrors());
-      }
-  
-      if (isDeleted) {
-        toast.success("Xóa thành công!!!");
-        history.push("/admin/products");
-        dispatch({ type: DELETE_PRODUCT_RESET });
-      }
+      toast.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      toast.success("Xóa thành công!!!");
+      history.push("/admin/products");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
     dispatch(getAdminProduct());
   }, [dispatch, alert, error, deleteError, history, isDeleted]);
 
 
-const columns = [
+  const columns = [
     { field: "id", headerName: "ID", minWidth: 200, flex: 0.1 },
 
     {
@@ -91,16 +91,16 @@ const columns = [
         return (
           <Fragment>
             <Link to={`/product/${params.getValue(params.id, "id")}`}>
-              <VisibilityOutlinedIcon style={{marginRight:".8vmax"}}/>
+              <VisibilityOutlinedIcon style={{ marginRight: ".8vmax" }} />
             </Link>
             <Link to={`/edit/product/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 
             <Button
-            onClick={() =>
+              onClick={() =>
                 deleteProductHandler(params.getValue(params.id, "id"))
-                
+
               }
             >
               <DeleteIcon />
@@ -116,7 +116,7 @@ const columns = [
   products &&
     products.forEach((item) => {
       rows.push({
-        id: item._id, 
+        id: item._id,
         stock: item.Stock,
         // supplier: item.supplier,
         price: item.price,
@@ -124,8 +124,8 @@ const columns = [
       });
     });
 
-    return (
-       <Fragment>
+  return (
+    <Fragment>
       <MetaData title={`ALL PRODUCTS - Admin`} />
 
       <div className="dashboard">
@@ -143,7 +143,7 @@ const columns = [
           />
         </div>
       </div>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -153,9 +153,9 @@ const columns = [
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </Fragment>
-    )
+  )
 }
 
 export default AllProducts

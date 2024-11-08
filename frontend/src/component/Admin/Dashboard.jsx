@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar.js";
 import "./dashboard.css";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Doughnut, Line } from "react-chartjs-2";
 // eslint-disable-next-line
@@ -12,7 +12,6 @@ import Loading from "../../more/Loader.js";
 import { getAdminProduct } from "../../actions/ProductActions.js";
 import { getAllOrders } from "../../actions/OrderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
-import { getAllImports } from "../../actions/importAction.js";
 import currency from "currency-formatter";
 import ProductChart from "./Chart/ProductChart.jsx";
 import UserChart from "./Chart/UserChart.jsx";
@@ -35,8 +34,6 @@ const Dashboard = () => {
   const { orders } = useSelector((state) => state.AllOrders);
 
   const { users } = useSelector((state) => state.allUsers);
-
-  const { imports } = useSelector((state) => state.imports);
 
   let outOfStock = 0;
   let canNhapHang = 0;
@@ -71,7 +68,6 @@ const Dashboard = () => {
     dispatch(getAdminProduct());
     dispatch(getAllOrders());
     dispatch(getAllUsers());
-    dispatch(getAllImports());
   }, [dispatch]);
 
   let totalAmount = 0;
@@ -113,17 +109,6 @@ const Dashboard = () => {
     ],
   };
 
-  // Tính tổng giá trị nhập hàng
-  const totalImportAmount = imports
-    ? imports.reduce((total, imp) => total + imp.totalAmount, 0)
-    : 0;
-
-  // Tính tổng số lượng sản phẩm đã nhập
-  const totalImportedItems = imports
-    ? imports.reduce((total, imp) => 
-        total + imp.products.reduce((sum, item) => sum + item.quantity, 0), 0)
-    : 0;
-
   return (
     <>
       {loading ? (
@@ -134,7 +119,7 @@ const Dashboard = () => {
           <Sidebar />
 
           <div className="dashboardContainer">
-            <Typography component="h1" style={{color:"black", fontWeight:"bold", fontSize:"50px"}}>Dashboard</Typography>
+            <Typography component="h1" style={{ color: "black", fontWeight: "bold", fontSize: "50px" }}>Dashboard</Typography>
 
             <div className="dashboardSummary">
               {/* <div>
@@ -145,45 +130,41 @@ const Dashboard = () => {
                 </p>
               </div> */}
               <div className="dashboardSummaryBox2">
-              <div>
-                <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>
-                  Tổng thu nhập <br />{" "}
-                </p >
-                <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{currency.format(totalAmount, { code: "VND" })}</p>
-                
-              </div>
+                <div>
+                  <p style={{ color: "#4B5563", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>
+                    Tổng thu nhập <br />{" "}
+                  </p >
+                  <p style={{ color: "black", fontFamily: "Oswald", fontWeight: "bold" }}>{currency.format(totalAmount, { code: "VND" })}</p>
+
+                </div>
                 <Link to="/admin/products">
-                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Sản phẩm</p>
-                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{products && products.length}</p>
+                  <p style={{ color: "#4B5563", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>Sản phẩm</p>
+                  <p style={{ color: "black", fontFamily: "Oswald", fontWeight: "bold" }}>{products && products.length}</p>
                 </Link>
                 <Link to="/admin/orders">
-                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Đơn hàng</p>
-                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{orders && orders.length}</p>
+                  <p style={{ color: "#4B5563", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>Đơn hàng</p>
+                  <p style={{ color: "black", fontFamily: "Oswald", fontWeight: "bold" }}>{orders && orders.length}</p>
                 </Link>
                 <Link to="/admin/users">
-                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Tài khoản</p>
-                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{users && users.length}</p>
-                </Link>
-                <Link to="/admin/imports">
-                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Nhập hàng</p>
-                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{imports && imports.length}</p>
+                  <p style={{ color: "#4B5563", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>Tài khoản</p>
+                  <p style={{ color: "black", fontFamily: "Oswald", fontWeight: "bold" }}>{users && users.length}</p>
                 </Link>
               </div>
               <div className="dashboardSummaryBox2">
-              <Link to="/admin/products">
-                  <p style={{color:"white", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Sản phẩm hết hàng</p>
-                  <p style={{color:"white", fontFamily:"Oswald", fontWeight:"bold"}}>{products && outOfStock}</p>
+                <Link to="/admin/products">
+                  <p style={{ color: "white", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>Sản phẩm hết hàng</p>
+                  <p style={{ color: "white", fontFamily: "Oswald", fontWeight: "bold" }}>{products && outOfStock}</p>
                 </Link>
                 <Link to="/admin/proposal">
-                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Sản phẩm cần nhập hàng:</p>
-                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{products && canNhapHang}</p>
+                  <p style={{ color: "#4B5563", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>Sản phẩm cần nhập hàng:</p>
+                  <p style={{ color: "black", fontFamily: "Oswald", fontWeight: "bold" }}>{products && canNhapHang}</p>
                 </Link>
                 <Link
                   to="/admin/lowratings"
-                  style={{ backgroundColor: "#FED7D7", borderBottom:"10px #EF4444 solid" }}
+                  style={{ backgroundColor: "#FED7D7", borderBottom: "10px #EF4444 solid" }}
                 >
-                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Cảnh báo sản phẩm:</p>
-                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{products && RatingSlow}</p>
+                  <p style={{ color: "#4B5563", fontFamily: "Oswald", fontWeight: "bold", fontSize: "20px" }}>Cảnh báo sản phẩm:</p>
+                  <p style={{ color: "black", fontFamily: "Oswald", fontWeight: "bold" }}>{products && RatingSlow}</p>
                 </Link>
               </div>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 import "./Cart.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/CartAction";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link } from "react-router-dom";
 import CartItemCard from "./CartItemCard.js";
@@ -46,13 +46,13 @@ const Cart = ({ history }) => {
   };
 
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping"); 
+    history.push("/login?Navigate=shipping");
   };
 
   return (
     <>
-    <Header />
-    <MetaData title="Giỏ hàng" />
+      <Header />
+      <MetaData title="Giỏ hàng" />
       {cartItems.length === 0 ? (
         <div className="emptyCart">
           <RemoveShoppingCartIcon />
@@ -63,7 +63,7 @@ const Cart = ({ history }) => {
       ) : (
         <>
           <div className="cartPage">
-            <h1 style={{textAlign:"center", paddingBottom:"1vmax"}}>Giỏ hàng</h1>
+            <h1 style={{ textAlign: "center", paddingBottom: "1vmax" }}>Giỏ hàng</h1>
             <div className="cartHeader">
               <p>Sản phẩm</p>
               <p>Số lượng</p>
@@ -98,8 +98,8 @@ const Cart = ({ history }) => {
                   {/* <p className="cartSubtotal">{`đ.${
                     item.price * item.quantity
                   }`}</p> */}
-                  <p className="cartSubtotal"> {currency.format( item.price * item.quantity, {code:"VND"})}</p>
-                 
+                  <p className="cartSubtotal"> {currency.format(item.price * item.quantity, { code: "VND" })}</p>
+
                 </div>
               ))}
 
@@ -107,9 +107,9 @@ const Cart = ({ history }) => {
               <div></div>
               <div className="cartGrossProfitBox">
                 <p>Tổng số tiền</p>
-                <p>{currency.format(totalPrice, {code:"VND"})}</p>
+                <p>{currency.format(totalPrice, { code: "VND" })}</p>
               </div>
-              <div></div> 
+              <div></div>
               <div className="checkOutBtn">
                 <button onClick={checkoutHandler}>Đặt hàng</button>
               </div>

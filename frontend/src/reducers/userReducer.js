@@ -173,7 +173,7 @@ export const allUsersReducer = (state = { users: [] }, action) => {
         ...state,
         loading: true,
       };
-    case ALL_USERS_SUCCESS: 
+    case ALL_USERS_SUCCESS:
       return {
         ...state,
         loading: false,

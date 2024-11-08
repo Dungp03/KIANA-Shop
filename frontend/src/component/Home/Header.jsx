@@ -16,7 +16,7 @@ import HeartIcon from "@material-ui/icons/FavoriteBorder";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Support from "@material-ui/icons/ReportProblem";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import { red } from "@material-ui/core/colors";
+import { red } from "@mui/material/colors";
 
 
 const Header = () => {
@@ -25,7 +25,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const switcherTab = useRef(null);
+  const RouteserTab = useRef(null);
 
   window.addEventListener("scroll", () => {
     if (window.pageYOffset > 100) {
@@ -111,7 +111,7 @@ const Header = () => {
   ];
 
   if (user && user !== null) {
-     if (user.role === "admin") {
+    if (user.role === "admin") {
       options.unshift({
         icon: <DashboardIcon />,
         name: "Quản lý",
@@ -135,7 +135,7 @@ const Header = () => {
         {/* Topbar Left */}
         <div className="logo pxy__10" >
           <Link to="/">
-            
+
           </Link>
         </div>
         {/* Topbar Middle */}
@@ -145,7 +145,7 @@ const Header = () => {
           style={{
             width: "53%",
             position: "relative",
-            
+
           }}
         >
         </div>
@@ -159,27 +159,27 @@ const Header = () => {
         </div>
       </div>
       {/* Header Navbar */}
-      <div className="navbar flex pz__10 space__beetween" ref={switcherTab}>
+      <div className="navbar flex pz__10 space__beetween" ref={RouteserTab}>
         <div
           className="navigation"
           style={{
-            display:"flex",
+            display: "flex",
             padding: "0px 50px",
-            alignItems:"center",
+            alignItems: "center",
           }}
         >
           <span style={{
-            fontFamily:"Ojuju",
-            cursor:"pointer",
-            fontWeight:"bolder",
-            paddingRight:"30px",
-            fontSize:30,
+            fontFamily: "Ojuju",
+            cursor: "pointer",
+            fontWeight: "bolder",
+            paddingRight: "30px",
+            fontSize: 30,
           }}>KIANA</span>
           <ul
             style={{
               fontFamily: "Oswald",
-              fontWeight:"bold",
-              fontSize:20,
+              fontWeight: "bold",
+              fontSize: 20,
               cursor: "pointer",
               display: "flex",
               listStyle: "none",
@@ -307,7 +307,7 @@ const Header = () => {
               <div className="dropdown-content">
                 {options.map((item) => (
                   <Link
-                  key={item.name}
+                    key={item.name}
                     to={item.link}
                     style={{ display: "flex", alignItems: "center" }}
                   >

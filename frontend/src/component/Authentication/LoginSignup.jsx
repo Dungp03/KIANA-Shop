@@ -32,7 +32,7 @@ const LoginSignup = ({ history, location }) => {
 
   const loginTab = useRef(null);
   const registerTab = useRef(null);
-  const switcherTab = useRef(null);
+  const RouteserTab = useRef(null);
 
   const [avatar, setAvatar] = useState("/profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/profile.png");
@@ -70,8 +70,8 @@ const LoginSignup = ({ history, location }) => {
       setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
-// console.log(avatar)
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  // console.log(avatar)
+  const Navigate = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (error) {
@@ -80,21 +80,21 @@ const LoginSignup = ({ history, location }) => {
     }
 
     if (isAuthenticated) {
-      history.push(redirect);
+      history.push(Navigate);
     }
   }, [dispatch, error, alert, history, isAuthenticated]);
 
-  const switchTabs = (e, tab) => {
+  const RoutesTabs = (e, tab) => {
     if (tab === "login") {
-      switcherTab.current.classList.add("shiftToNeutral");
-      switcherTab.current.classList.remove("shiftToRight");
+      RouteserTab.current.classList.add("shiftToNeutral");
+      RouteserTab.current.classList.remove("shiftToRight");
 
       registerTab.current.classList.remove("shiftToNeutralForm");
       loginTab.current.classList.remove("shiftToLeft");
     }
     if (tab === "register") {
-      switcherTab.current.classList.add("shiftToRight");
-      switcherTab.current.classList.remove("shiftToNeutral");
+      RouteserTab.current.classList.add("shiftToRight");
+      RouteserTab.current.classList.remove("shiftToNeutral");
 
       registerTab.current.classList.add("shiftToNeutralForm");
       loginTab.current.classList.add("shiftToLeft");
@@ -111,10 +111,10 @@ const LoginSignup = ({ history, location }) => {
             <div className="LoginSignUpBox">
               <div>
                 <div className="login_signUp_toggle">
-                  <p onClick={(e) => switchTabs(e, "login")}>ĐĂNG NHẬP</p>
-                  <p onClick={(e) => switchTabs(e, "register")}>ĐĂNG KÝ</p>
+                  <p onClick={(e) => RoutesTabs(e, "login")}>ĐĂNG NHẬP</p>
+                  <p onClick={(e) => RoutesTabs(e, "register")}>ĐĂNG KÝ</p>
                 </div>
-                <button ref={switcherTab}></button>
+                <button ref={RouteserTab}></button>
               </div>
               <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
                 <div className="loginEmail">

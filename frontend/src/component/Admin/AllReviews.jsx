@@ -7,7 +7,7 @@ import {
   getAllReviews,
   deleteReviews,
 } from "../../actions/ProductActions";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../../more/Metadata";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Star from "@material-ui/icons/Star";
@@ -173,7 +173,7 @@ const AllReviews = ({ history }) => {
           )}
         </div>
       </div>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -183,7 +183,7 @@ const AllReviews = ({ history }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </Fragment>
   );
 };

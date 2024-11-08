@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./UserOption.css";
 import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
-import Backdrop from "@material-ui/core/Backdrop";
+import Backdrop from "@mui/material/Backdrop";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -10,8 +10,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Support from "@material-ui/icons/ReportProblem"
 import HeartIcon from "@material-ui/icons/FavoriteBorder";
 import HeartActiveIcon from "@material-ui/icons/Favorite";
-import HomeIcon from "@material-ui/icons/Home"; 
-import { useHistory } from "react-router-dom";
+import HomeIcon from "@material-ui/icons/Home";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userAction";
 import { useRef } from "react";
@@ -24,15 +24,15 @@ const UserData = ({ user }) => {
   const { favouriteItems } = useSelector((state) => state.favourite);
 
   const [open, setOpen] = useState(false);
-  const history = useHistory();
-  
+  const history = useNavigate();
+
   const scroolEffect = useRef(null);
 
-  window.addEventListener("scroll", () =>{
-    if(window.pageYOffset > 100){
-        document.querySelector(".speedDial").classList.add("active");
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 100) {
+      document.querySelector(".speedDial").classList.add("active");
     }
-    else{
+    else {
       document.querySelector(".speedDial").classList.remove("active");
     }
   })
@@ -45,9 +45,9 @@ const UserData = ({ user }) => {
     {
       icon: (
         <ShoppingCartIcon
-        style={{
-         color: cartItems.length === 0 ? "" : "tomato",
-        }}
+          style={{
+            color: cartItems.length === 0 ? "" : "tomato",
+          }}
         />
       ),
       name: `Giỏ hàng (${cartItems.length})`,
@@ -55,13 +55,13 @@ const UserData = ({ user }) => {
     },
     {
       icon:
-          <HeartIcon 
+        <HeartIcon
           style={{
             color: favouriteItems.length === 0 ? "" : "tomato",
-           }}
-          />,
+          }}
+        />,
       name:
-      `Yêu thích (${favouriteItems.length})`,
+        `Yêu thích (${favouriteItems.length})`,
       func: favourite,
     },
     { icon: <PersonIcon />, name: "Trang cá nhân", func: account },
@@ -121,7 +121,7 @@ const UserData = ({ user }) => {
         onOpen={() => setOpen(true)}
         style={{ zIndex: "11" }}
         open={open}
-        direction="down" 
+        direction="down"
         className="speedDial"
         useRef={scroolEffect}
         icon={
@@ -130,7 +130,7 @@ const UserData = ({ user }) => {
             src={user.avatar ? user.avatar.url : ("/profile.png")}
             alt="Profile"
             style={{
-              position:"fixed"
+              position: "fixed"
             }}
           />
         }
@@ -145,7 +145,7 @@ const UserData = ({ user }) => {
           />
         ))}
       </SpeedDial>
-      <ToastContainer 
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -155,7 +155,7 @@ const UserData = ({ user }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        />
+      />
     </>
   );
 };

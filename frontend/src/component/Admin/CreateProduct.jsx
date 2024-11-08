@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./newProduct.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, createProduct } from "../../actions/ProductActions";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import MetaData from "../../more/Metadata";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
 // import DescriptionIcon from "@material-ui/icons/Description";
@@ -18,12 +18,11 @@ import SizesList from "./SizeList";
 import ColorsList from "./ColorsList";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
 const CreateProduct = ({ history }) => {
   const dispatch = useDispatch();
 
-  const { loading, error, success } = useSelector(
-    (state) => state.createProduct
-  );
+  const { loading, error, success } = useSelector((state) => state.createProduct);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
@@ -33,8 +32,6 @@ const CreateProduct = ({ history }) => {
   const [offerPrice, setOfferPrice] = useState("");
   const [images, setImages] = useState([]);
   const [imagesPreview, setImagesPreview] = useState([]);
-  // const [supplier, setSupplier] = useState("Chưa cập nhật...");
-
 
   const categories = [
     "Áo thun nam",
@@ -115,22 +112,12 @@ const CreateProduct = ({ history }) => {
   //chọn màu
   const [colorList, setColorList] = useState([{ name: "one color" }]);
   const chooseColor = (sizeObject) => {
-    const filtered = colorList.filter(
-      (color) => color.name !== sizeObject.name
-    );
+    const filtered = colorList.filter((color) => color.name !== sizeObject.name);
     setColorList([...filtered, sizeObject]);
   };
   const deleteColor = (name) => {
     const filtered = colorList.filter((color) => color.name !== name);
     setColorList(filtered);
-  };
-
-  const generateProductId = () => {
-    // Tạo số ngẫu nhiên 6 chữ số từ 100000 đến 999999
-    const randomNumber = Math.floor(100000 + Math.random() * 900000);
-    // Đảm bảo luôn có 6 chữ số bằng cách sử dụng padStart
-    const sixDigits = randomNumber.toString().padStart(6, '0');
-    return `SP-${sixDigits}`;
   };
 
   useEffect(() => {
@@ -150,21 +137,7 @@ const CreateProduct = ({ history }) => {
     e.preventDefault();
 
     try {
-      const id = generateProductId();
-      
-      // Kiểm tra xem ID đã tồn tại chưa
-      const response = await fetch(`/api/v1/product/check/${id}`);
-      const data = await response.json();
-      
-      if (data.exists) {
-        // Nếu ID đã tồn tại, tạo ID mới
-        return createProductSubmitHandler(e);
-      }
-
-      setProductId(id);
-
       const myForm = new FormData();
-      myForm.set("productId", id);
       myForm.set("name", name);
       myForm.set("price", price);
       myForm.set("offerPrice", offerPrice);
@@ -173,7 +146,6 @@ const CreateProduct = ({ history }) => {
       myForm.set("Stock", Stock);
       myForm.append("sizes", JSON.stringify(sizeList));
       myForm.append("color", JSON.stringify(colorList));
-      // myForm.set("supplier", supplier);
 
       images.forEach((image) => {
         myForm.append("images", image);
@@ -320,25 +292,14 @@ const CreateProduct = ({ history }) => {
                 </div>
               )}
             </div>
-            {/* <div>
-              <Creator />
-              <input
-                type="string"
-                placeholder="Nhà cung cấp"
-              
-                onChange={(e) => setSupplier(e.target.value)}
-              />
-            </div> */}
             <div className="description">
-              {/* <DescriptionIcon />
-              <textarea
-                placeholder="Mô tả sản phẩm"
+              <ReactQuill
+                theme="snow"
+                id="description"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea> */}
-              <ReactQuill theme="snow" id="description" value={description} onChange={setDescription} placeholder="Mô tả sản phẩm..." />
+                onChange={setDescription}
+                placeholder="Mô tả sản phẩm..."
+              />
             </div>
             <Button
               id="createProductBtn"

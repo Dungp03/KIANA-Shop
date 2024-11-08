@@ -3,7 +3,7 @@ import "./orderDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../more/Metadata";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { getOrderDetails, clearErrors } from "../../actions/OrderAction";
 import { useAlert } from "react-alert";
 import Loading from "../../more/Loader";
@@ -27,12 +27,12 @@ const MyOrderDetails = ({ match }) => {
   }, [dispatch, alert, error, match.params.id]);
   return (
     <>
-  
+
       {loading ? (
         <Loading />
       ) : (
         <>
-        
+
           <MetaData title="Chi tiết đơn hàng" />
           <Header />
           <div className="orderDetailsPage">
@@ -56,7 +56,7 @@ const MyOrderDetails = ({ match }) => {
                   <p>Địa chỉ:</p>
                   <span>
                     {order.shippingInfo &&
-                      `${order.shippingInfo.address}, ${order.shippingInfo.wards}, ${order.shippingInfo.district}, ${order.shippingInfo.province}`} 
+                      `${order.shippingInfo.address}, ${order.shippingInfo.wards}, ${order.shippingInfo.district}, ${order.shippingInfo.province}`}
                   </span>
                 </div>
               </div>
@@ -69,33 +69,33 @@ const MyOrderDetails = ({ match }) => {
                         ? "greenColor"
                         : "redColor"
                     }
-                  >                  
+                  >
                   </p>
                   <p style={{
-                      color:"green"
+                    color: "green"
                   }}>
-                  Đã thanh toán
+                    Đã thanh toán
                   </p>
-                  <span>({order.paidAt && formatDistanceToNow(new Date(order.paidAt),{addSuffix: true})})</span>
+                  <span>({order.paidAt && formatDistanceToNow(new Date(order.paidAt), { addSuffix: true })})</span>
                 </div>
 
                 <div>
                   <p>Thành tiền:</p>
                   {/* <span>$ {order.totalPrice && order.totalPrice}</span> */}
-                  <span>{currency.format(order.totalPrice && order.totalPrice, {code:"VND"})}</span>
+                  <span>{currency.format(order.totalPrice && order.totalPrice, { code: "VND" })}</span>
                 </div>
 
                 <div>
                   <p>Hình thức thanh toán:</p>
-                 
-                  <p style={{fontSize:"1.1vmax", fontWeight:"bold",marginLeft:"4px"}}> {order.paymentMethod}</p>
+
+                  <p style={{ fontSize: "1.1vmax", fontWeight: "bold", marginLeft: "4px" }}> {order.paymentMethod}</p>
                 </div>
-               
+
               </div>
 
               <Typography>Trạng thái đơn hàng:</Typography>
               <div className="orderDetailsContainerBox">
-                <div style={{flexDirection: "column",}}>
+                <div style={{ flexDirection: "column", }}>
                   <p
                     className={
                       order.orderStatus && order.orderStatus === "Delivered"
@@ -105,14 +105,14 @@ const MyOrderDetails = ({ match }) => {
                   >
                     {order.orderStatus && order.orderStatus}
                   </p>
-                  
+
                   {order.orderStatus && order.orderStatus === "Hủy đơn hàng" ? (
-                    <p  style={{
+                    <p style={{
                       fontSize: "1.2vmax",
                       color: "black",
-                      fontWeight:"600"
+                      fontWeight: "600"
                     }}>Quản lý, nhân viên sẽ liên hệ phản hồi qua Email hoặc Số điện thoại của bạn trong thời gian sớm nhất, kính mong quý khách thông cảm!!!</p>
-                  ):(null)}
+                  ) : (null)}
                 </div>
               </div>
             </div>
@@ -126,20 +126,20 @@ const MyOrderDetails = ({ match }) => {
                     <div key={item.Offer}>
                       <img src={item.image} alt="Product" />
                       <div style={{ display: "contents" }}>
-                            <Link to={`/product/${item.Offer}`}>
-                              {item.name}
-                            </Link>{" "}
-                           Size: {item.size && item.size}, Màu: {item.color && item.color}
-                          </div>
-                          <span>
-                            {/* {item.quantity} X {currency.format(item.price, {code:"VND"})} ={" "}
+                        <Link to={`/product/${item.Offer}`}>
+                          {item.name}
+                        </Link>{" "}
+                        Size: {item.size && item.size}, Màu: {item.color && item.color}
+                      </div>
+                      <span>
+                        {/* {item.quantity} X {currency.format(item.price, {code:"VND"})} ={" "}
                             <b>{currency.format(item.quantity * item.price, {code:"VND"})}</b> */}
-                            {item.quantity} X{" "}
-                            {currency.format(item.price, { code: "VND" })} ={" "}
-                            {currency.format(item.quantity * item.price, {
-                              code: "VND",
-                            })}
-                          </span>
+                        {item.quantity} X{" "}
+                        {currency.format(item.price, { code: "VND" })} ={" "}
+                        {currency.format(item.quantity * item.price, {
+                          code: "VND",
+                        })}
+                      </span>
                     </div>
                   ))}
 

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import MetaData from "../../more/Metadata";
 import { Link } from "react-router-dom";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import SideBar from "./Sidebar";
 import {
   getOrderDetails,
@@ -11,7 +11,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../../more/Loader";
 import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import { UPDATE_ORDER_RESET } from "../../constans/OrderConstans";
 import "./UpdateOrder.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -100,7 +100,7 @@ const UpdateOrder = ({ history, match }) => {
                   <div className="orderDetailsContainerBox">
                     <div>
                       {order &&
-                      order.paymentMethod === "Thanh toán khi nhận hàng !" ? (
+                        order.paymentMethod === "Thanh toán khi nhận hàng !" ? (
                         <p
                           style={{
                             color: "red",
@@ -287,7 +287,7 @@ const UpdateOrder = ({ history, match }) => {
                           color: "black",
                         }}
                       >
-                        Số điện thoại: 
+                        Số điện thoại:
                         0{order.shippingInfo && order.shippingInfo.phoneNo}{" "}
                       </p>
                       <p
@@ -295,9 +295,9 @@ const UpdateOrder = ({ history, match }) => {
                           fontSize: "1.2vmax",
                           color: "black",
                         }}
-                      >Email: 
-                      <span>{order.user && order.user.email}</span>
-                    </p>
+                      >Email:
+                        <span>{order.user && order.user.email}</span>
+                      </p>
                     </div>
                   ) : null}
                 </form>
