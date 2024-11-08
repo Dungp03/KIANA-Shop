@@ -1,1 +1,33 @@
- 
+.productImportField {
+    display: flex;
+    gap: 1vmax;
+    align-items: center;
+    padding: 1vmax;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    margin: 1vmax 0;
+  }
+
+  .productImportField > div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .productImportField > div > input,
+  .productImportField > div > select {
+    padding: 1vmax 4vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 300 0.9vmax cursive;
+    outline: none;
+  }
+
+  .productImportField > div > svg {
+    position: absolute;
+    transform: translateX(1vmax);
+    font-size: 1.6vmax;
+    color: rgba(0, 0, 0, 0.623);
+  } 

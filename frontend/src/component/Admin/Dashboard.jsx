@@ -12,6 +12,7 @@ import Loading from "../../more/Loader.js";
 import { getAdminProduct } from "../../actions/ProductActions.js";
 import { getAllOrders } from "../../actions/OrderAction.js";
 import { getAllUsers } from "../../actions/userAction.js";
+import { getAllImports } from "../../actions/importAction.js";
 import currency from "currency-formatter";
 import ProductChart from "./Chart/ProductChart.jsx";
 import UserChart from "./Chart/UserChart.jsx";
@@ -34,6 +35,8 @@ const Dashboard = () => {
   const { orders } = useSelector((state) => state.AllOrders);
 
   const { users } = useSelector((state) => state.allUsers);
+
+  const { imports } = useSelector((state) => state.imports);
 
   let outOfStock = 0;
   let canNhapHang = 0;
@@ -68,6 +71,7 @@ const Dashboard = () => {
     dispatch(getAdminProduct());
     dispatch(getAllOrders());
     dispatch(getAllUsers());
+    dispatch(getAllImports());
   }, [dispatch]);
 
   let totalAmount = 0;
@@ -109,6 +113,17 @@ const Dashboard = () => {
     ],
   };
 
+  // Tính tổng giá trị nhập hàng
+  const totalImportAmount = imports
+    ? imports.reduce((total, imp) => total + imp.totalAmount, 0)
+    : 0;
+
+  // Tính tổng số lượng sản phẩm đã nhập
+  const totalImportedItems = imports
+    ? imports.reduce((total, imp) => 
+        total + imp.products.reduce((sum, item) => sum + item.quantity, 0), 0)
+    : 0;
+
   return (
     <>
       {loading ? (
@@ -149,7 +164,10 @@ const Dashboard = () => {
                   <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Tài khoản</p>
                   <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{users && users.length}</p>
                 </Link>
-                
+                <Link to="/admin/imports">
+                  <p style={{color:"#4B5563", fontFamily:"Oswald", fontWeight:"bold", fontSize:"20px"}}>Nhập hàng</p>
+                  <p style={{color:"black", fontFamily:"Oswald", fontWeight:"bold"}}>{imports && imports.length}</p>
+                </Link>
               </div>
               <div className="dashboardSummaryBox2">
               <Link to="/admin/products">
