@@ -103,7 +103,7 @@ const CreateProduct = ({ history }) => {
   ]);
 
   // chọn size
-  const [sizeList, setSizeList] = useState([{name:"FREESIZE"}]);
+  const [sizeList, setSizeList] = useState([{ name: "FREESIZE" }]);
   const chooseSize = (sizeObject) => {
     const filtered = sizeList.filter((size) => size.name !== sizeObject.name);
     setSizeList([...filtered, sizeObject]);
@@ -113,7 +113,7 @@ const CreateProduct = ({ history }) => {
     setSizeList(filtered);
   };
   //chọn màu
-  const [colorList, setColorList] = useState([{name:"one color"}]);
+  const [colorList, setColorList] = useState([{ name: "one color" }]);
   const chooseColor = (sizeObject) => {
     const filtered = colorList.filter(
       (color) => color.name !== sizeObject.name
@@ -124,6 +124,12 @@ const CreateProduct = ({ history }) => {
     const filtered = colorList.filter((color) => color.name !== name);
     setColorList(filtered);
   };
+
+  const generateProductId = () => {
+    const randomId = Math.floor(100000 + Math.random() * 900000); // Tạo số ngẫu nhiên từ 100000 đến 999999
+    return `SP-${randomId}`;
+  };
+
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -140,8 +146,11 @@ const CreateProduct = ({ history }) => {
   const createProductSubmitHandler = (e) => {
     e.preventDefault();
 
-    const myForm = new FormData();
+    const id = generateProductId();
+    setProductId(id); // Đặt ID cho sản phẩm
 
+    const myForm = new FormData();
+    myForm.set("productId", id);
     myForm.set("name", name);
     myForm.set("price", price);
     myForm.set("offerPrice", offerPrice);
@@ -312,7 +321,7 @@ const CreateProduct = ({ history }) => {
                 cols="30"
                 rows="1"
               ></textarea> */}
-              <ReactQuill theme="snow" id="description" value={description} onChange={setDescription}  placeholder="Mô tả sản phẩm..." />
+              <ReactQuill theme="snow" id="description" value={description} onChange={setDescription} placeholder="Mô tả sản phẩm..." />
             </div>
             <Button
               id="createProductBtn"
